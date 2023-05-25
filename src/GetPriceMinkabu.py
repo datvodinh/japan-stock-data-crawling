@@ -1,4 +1,4 @@
-from src.lib import *
+from lib import *
 
 # SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/Minkabu"
 chrome_options = Options()
@@ -10,7 +10,7 @@ PATH = "C:\chromedriver.exe"
 def SaveData(table,code,SAVE_PATH):
     table.to_csv(f"{SAVE_PATH}/{code}.csv")
 
-def FindTable(driver,html,selector):
+def FindTable(html,selector):
     soup = BeautifulSoup(html,'html.parser')
     table = soup.select_one(selector)
     table = pd.read_html(str(table))
@@ -34,10 +34,14 @@ def GetDataMinkabu(code,SAVE_PATH):
             break
     html = driver.page_source
     # time.sleep(3)
-    table = FindTable(driver,html,"#fourvalue_timeline")
+    table = FindTable(html,"#fourvalue_timeline")
     
     SaveData(table[0],code,SAVE_PATH)
 
     driver.quit()
 
     print(f"Code: {code} Done!")
+
+if __name__ == "__main__":
+    SAVE_PATH = "C:/Users/vodin/Documents/Stock-Data-Crawling/data/Minkabu"
+    GetDataMinkabu("1301",SAVE_PATH)
