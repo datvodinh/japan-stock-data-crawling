@@ -1,11 +1,11 @@
 from src.lib import *
 
 today = date.today()
-SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/YahooJP"
+# SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/YahooJP"
 past = "19500101"
 now = today.strftime("%Y%m%d")
 
-def SaveData(df,code):
+def SaveData(df,code,SAVE_PATH):
     df.to_csv(f"{SAVE_PATH}/{code}.csv")
 
 def FindTableSinglePage(html):
@@ -25,7 +25,7 @@ def GetRequest(URL):
             time.sleep(3)
     return html
 
-def GetDataYahooJP(code):
+def GetDataYahooJP(code,SAVE_PATH):
     df_all = pd.DataFrame()
     for page in range(1,10000):
         URL = GetUrl(page,code)
@@ -38,6 +38,6 @@ def GetDataYahooJP(code):
         except:
             break
     
-    SaveData(df_all,code)
+    SaveData(df_all,code,SAVE_PATH)
 
     print(f"Code: {code} Done!")

@@ -1,13 +1,13 @@
 from src.lib import *
 
-SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/Minkabu"
+# SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/Minkabu"
 chrome_options = Options()
 chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--window-size=1920x1080")
 chrome_options.add_argument("--headless")
 PATH = "C:\chromedriver.exe"
 
-def SaveData(table,code):
+def SaveData(table,code,SAVE_PATH):
     table.to_csv(f"{SAVE_PATH}/{code}.csv")
 
 def FindTable(driver,html,selector):
@@ -22,7 +22,7 @@ def ScrollAndClick(button,driver):
     driver.execute_script("window.scrollTo(0, window.scrollY + 300)")
     time.sleep(0.5)
 
-def GetDataMinkabu(code):
+def GetDataMinkabu(code,SAVE_PATH):
     URL  = f"https://minkabu.jp/stock/{code}/daily_bar"
     driver = webdriver.Chrome(PATH,options=chrome_options)
     driver.get(URL)
@@ -36,7 +36,7 @@ def GetDataMinkabu(code):
     # time.sleep(3)
     table = FindTable(driver,html,"#fourvalue_timeline")
     
-    SaveData(table[0],code)
+    SaveData(table[0],code,SAVE_PATH)
 
     driver.quit()
 

@@ -1,6 +1,6 @@
 from src.lib import *
 
-SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/MarketWatch"
+# SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/MarketWatch"
 today = date.today()
 # dd/mm/YY
 
@@ -25,7 +25,7 @@ def GetPathDataByYear(year,code):
         #     time.sleep(3)
     return PATH
 
-def GetDataMarketWatch(code): 
+def GetDataMarketWatch(code,SAVE_PATH): 
     running = True
     year = 2023
     list_data = ['Date,Open,High,Low,Close,Volume']
