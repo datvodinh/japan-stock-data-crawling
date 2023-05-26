@@ -1,4 +1,4 @@
-from src.lib import *
+from lib import *
 
 today = date.today()
 # SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/YahooJP"
@@ -31,7 +31,7 @@ def GetDataYahooJP(code,SAVE_PATH):
         URL = GetUrl(page,code)
         
         html = GetRequest(URL)
-
+        # print(page,end=" ")
         try: #get table
             df_single = FindTableSinglePage(html)
             df_all = pd.concat([df_all, df_single], ignore_index=True).reset_index(drop=True)
@@ -41,3 +41,7 @@ def GetDataYahooJP(code,SAVE_PATH):
     SaveData(df_all,code,SAVE_PATH)
 
     print(f"Code: {code} Done!")
+
+if __name__ == "__main__":
+    SAVE_PATH = "./data/YahooJP"
+    GetDataYahooJP("1301",SAVE_PATH)
