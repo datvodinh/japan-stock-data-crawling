@@ -4,7 +4,7 @@ from lib import *
 chrome_options = Options()
 chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--window-size=1920x1080")
-chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--headless")
 PATH = "C:\chromedriver.exe"
 
 def SaveData(table,code,SAVE_PATH):
@@ -18,9 +18,8 @@ def FindTable(html,selector):
 
 def ScrollAndClick(button,driver):
     button.click()
-    time.sleep(0.5)
+    time.sleep(0.1)
     driver.execute_script("window.scrollTo(0, window.scrollY + 300)")
-    time.sleep(0.5)
 
 def GetDataMinkabu(code,SAVE_PATH):
     URL  = f"https://minkabu.jp/stock/{code}/daily_bar"
@@ -28,9 +27,20 @@ def GetDataMinkabu(code,SAVE_PATH):
     driver.get(URL)
     show_more = driver.find_element(By.XPATH,'//*[@id="contents"]/div[3]/div[2]/div/div/p/a')
     for i in range(10000):
-        try:
-            ScrollAndClick(show_more,driver)
-        except:
+        waiting = True
+        c = 0
+        done = False
+        while waiting:
+            try:
+                ScrollAndClick(show_more,driver)
+                waiting = False
+            except:
+                c += 1
+                print(c)
+                if c >20:
+                    waiting = False
+                    done = True
+        if done:
             break
     html = driver.page_source
     # time.sleep(3)
