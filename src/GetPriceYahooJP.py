@@ -1,4 +1,4 @@
-from lib import *
+from src.lib import *
 
 today = date.today()
 # SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/YahooJP"
@@ -22,6 +22,7 @@ def GetRequest(URL):
             html = requests.get(URL)
             waiting = False
         except:
+            # print("!",end="")
             time.sleep(3)
     return html
 
