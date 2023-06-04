@@ -5,6 +5,9 @@ C:.
 │   .gitignore
 │   README.md
 │   requirements.txt
+|   main_market.ipynb
+|   main_minkabu.ipynb
+|   main_yahoo.ipynb
 │   
 ├───data
 │ 
@@ -13,12 +16,6 @@ C:.
 │       GetPriceMinkabu.py
 │       GetPriceYahooJP.py
 │       lib.py
-│
-└───src_old
-        GetDataPOSTRequest.py
-        GetDataSelenium.py
-        GetDataYahooJP.ipynb
-        GetPriceMarketWatch.ipynb
-        GetPriceMinkabu.ipynb
-        GetPriceYahooFinance.ipynb
+
+
 ```
