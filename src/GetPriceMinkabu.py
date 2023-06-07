@@ -1,10 +1,10 @@
-from src.lib import *
+from lib import *
 
 # SAVE_PATH = f"C:/Users/vodin/Documents/Stock-Data-Crawling/data/Minkabu"
 chrome_options = Options()
 chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--window-size=1920x1080")
-chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--headless")
 PATH = "C:\chromedriver.exe"
 
 def SaveData(table,code,SAVE_PATH):
@@ -26,7 +26,10 @@ def GetDataMinkabu(code,SAVE_PATH):
     driver = webdriver.Chrome(PATH,options=chrome_options)
     driver.execute_script("window.scrollTo(0, window.scrollY + 200)")
     driver.get(URL)
-    show_more = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[4]/div[1]/div[1]/div[3]/div[2]/div/div/p/a')
+    try:
+        show_more = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[4]/div[1]/div[1]/div[3]/div[1]/div/div/p/a')
+    except:
+        show_more = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[4]/div[1]/div[1]/div[3]/div[2]/div/div/p/a')
     for i in range(10000):
         waiting = True
         c = 0
@@ -55,4 +58,4 @@ def GetDataMinkabu(code,SAVE_PATH):
 
 if __name__ == "__main__":
     SAVE_PATH = "C:/Users/vodin/Documents/Stock-Data-Crawling/data/Minkabu"
-    GetDataMinkabu("9997",SAVE_PATH)
+    GetDataMinkabu("7697",SAVE_PATH)
